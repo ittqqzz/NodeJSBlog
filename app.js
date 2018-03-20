@@ -5,6 +5,14 @@
 var express = require('express');
 //为了前后端分离，需要加载模板
 var swig = require('swig');
+//加载数据库mongoose模块
+var mongoose = require('mongoose');
+//加载body-parser,用来处理post提交过来的数据
+var bodyParser = require('body-parser');
+//加载cookies模块
+var Cookies = require('cookies');
+//解析cookie
+var cookieParser = require('cookie-parser');
 //创建app应用
 var app = express(); // 等价于===>http.createServer()
 /*静态文件托管
@@ -24,24 +32,49 @@ app.set('views','./views');
 	第一个参数必须是view engine
 	第二个参数与第一步中的第一个参数保持一致*/
 app.set('view engine','html');
-//监听http请求
-app.listen(8081);
+
 //关闭模板缓存
 swig.setDefaults({cache:false});
-/**
- * 路由绑定
- */
 
-//首页
-app.get('/', function (req, res, next) {
-    /**
-     *读取views目录下的指定文件，解析并返回给客户端
-     * 模板引擎一旦解析了某个文件后，会将其保存在内存里面，
-     *      便于下一次被访问，而不是再从文件里面加载一次，
-     *      开发过程中需要关闭这个功能，解决办法：使用
-     *       swig.setDefaults({cache:false});
-     * 第一个参数：表示模板的文件，相对于views目录：views/index.html
-     * 第二个参数：传递给模板使用的数据
-     * */
-    res.render('index');
+//bodyparser设置
+app.use(bodyParser.urlencoded({extended:true}));
+//设置cookie
+app.use(cookieParser());
+
+app.use(function(req,res,next){
+    // req.cookies= new Cookies(req,res);
+    //解析登录用户的cookie信息
+    req.userInfo = {};
+    if(req.cookies){
+        try{
+            req.userInfo = JSON.parse(JSON.stringify(req.cookies.userInfo));
+            console.log('cookies is '+JSON.stringify(req.cookies.userInfo));
+        }catch(e){
+            console.log('cookie验证出错');
+        }
+    } else {
+        console.log('不存在cookie');
+    }
+
+    next();
 });
+//根据不同功能划分模块（后台、API、前台）
+app.use('/admin',require('./routers/admin'));
+app.use('/api',require('./routers/api'));
+app.use('/',require('./routers/main'));
+
+
+//连接数据库(需要下载安装mongoose)
+mongoose.connect('mongodb://localhost:27017/blog', function (err) {
+    if (err) {
+        console.log('数据库连接失败'+err);
+    } else {
+        console.log('数据库连接成功');
+        //监听http请求
+        app.listen(3000);
+        console.log('正在监听。。。');
+    }
+});
+
+
+

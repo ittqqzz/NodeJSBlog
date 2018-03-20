@@ -1150,7 +1150,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
             : search.toUpperCase()
         ;
 
-        // main return of the found node
+        // m return of the found node
         if ((target[propertyToFind] || '').indexOf(expectedValue) != -1)
             return target;
 
@@ -2299,7 +2299,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
 
             var div = this.create('div');
 
-            // create main HTML
+            // create m HTML
             div.innerHTML = this.getHtml(code);
 
             // set up click handlers

@@ -56,12 +56,14 @@ form p{
 
 footer{
 	background: url(../images/header_bg.jpg) no-repeat 50% 50% ; 
-	height: 100px;
+	height: 70px;
+	position: absolute;
+	bottom:0px;
+	width: 100%;
 }
 
 footer div {
-	
-	line-height: 100px;
+	line-height: 70px;
 	text-align: center;
 	font-size: 14px;
 	color: white;

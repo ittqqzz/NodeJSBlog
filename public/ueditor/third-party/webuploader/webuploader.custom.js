@@ -4255,7 +4255,7 @@
             dirOffset = dataView.getUint32( tiffOffset + 4, littleEndian );
             // Create the exif object to store the tags:
             data.exif = new EXIF.ExifMap();
-            // Parse the tags of the main image directory and retrieve the
+            // Parse the tags of the m image directory and retrieve the
             // offset to the next directory, usually the thumbnail directory:
             dirOffset = EXIF.parseExifTags( dataView, tiffOffset,
                     tiffOffset + dirOffset, littleEndian, data );

@@ -11708,7 +11708,7 @@ UE.commands['time'] = UE.commands["date"] = {
                 yy = yyyy.slice(-2),
                 mm = ('0' + (date.getMonth()+1)).slice(-2),
                 dd = ('0' + date.getDate()).slice(-2);
-            format = format || 'yyyy-mm-dd';
+            format = format || 'yyyy-main-dd';
             return format.replace(/yyyy/ig, yyyy).replace(/yy/ig, yy).replace(/mm/ig, mm).replace(/dd/ig, dd);
         }
 

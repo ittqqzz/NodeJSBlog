@@ -56,16 +56,12 @@ $(function(){
 			},
 			dataType:'json',
 			success:function(result){
-				
-				$login.find('.myInfo').html(result.message);
-				if(!result.code){
-					setTimeout(function(){
-						window.location.reload();
-					},1000)	
-				}
+                if(!result.code){
+                    window.location.reload();
+                }
 			},
 			error:function(err){
-				
+				console.log(err);
 			}
 		})
 	});
