@@ -11,14 +11,14 @@ var Category = require('../models/Category');
 var Content = require('../models/Content');
 
 //先验证是否为管理员操作
-// router.use(function (req, res, next) {
-//     if (!req.userInfo.isAdmin) {
-//         //不是管理员
-//         res.send('你不是管理员，退下！');
-//         return;
-//     }
-//     next();
-// });
+router.use(function (req, res, next) {
+    if (!req.userInfo.isAdmin) {
+        //不是管理员
+        res.send('你不是管理员，退下！');
+        return;
+    }
+    next();
+});
 
 router.get('/', function (req, res, next) {
     res.render('admin/index', {
@@ -73,16 +73,7 @@ router.get('/user', function (req,res) {
  * 分类首页
  */
 router.get('/category',function(req,res,next){
-    // var page= Number(req.query.page || 1);
-    // var limit=10;
-    // var pages=0;
-    //
-    // //计算总页数
-    // var count=categories.length;
-    // pages=Math.ceil(count/limit);
-    // //取值
-    // page=Math.min(page,pages);
-    // page=Math.max(page,1);
+
     var page = Number(req.query.page || 1);
     var limit = 2;
 

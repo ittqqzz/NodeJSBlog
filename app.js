@@ -80,7 +80,7 @@ mongoose.connect('mongodb://localhost:27017/blog', function (err) {
         console.log('数据库连接成功');
         //监听http请求
         app.listen(3000);
-        console.log('正在监听。。。');
+        console.log('服务器已经启动，地址：http://localhost:3000/');
     }
 });
 

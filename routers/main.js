@@ -55,6 +55,7 @@ router.get('/view',function(req,res,next){
         _id : contentId
     }).then(function (content) {
         data.content = content;
+        //res.writeHead(200, {'Context-Type' : 'text/html'});
         res.render('main/view', data);
     });
 });
