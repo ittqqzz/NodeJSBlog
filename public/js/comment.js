@@ -1,4 +1,4 @@
-var perpage = 6;
+var prepage = 5;
 var page = 1;
 var pages = 0;
 var comments = [];
@@ -9,35 +9,34 @@ $('#messageBtn').on('click',function(){
 		url:'/api/comment/post',
 		data:{
 			contentid:$("#contentId").val(),
-			comment:$('#commitTextarea').val()
+			comment:$('#commentTextarea').val()
 		},
 		dataType:'json',
-		success:function(result){
-			$('#commitTextarea').val('');
+		success:function(responseData){
+			$('#commentTextarea').val('');
+			comments = responseData.data.comments.reverse();
 			renderComment();
-			if(!result.code){
-				window.location.reload();
-			}
 		},
 		error:function(err){
+			console.log(err);
 		}
-	})
+	});
 });
 
 //每次页面重载的时候获取一下该文章的所有评论
 $.ajax({
 	url:'/api/comment',
 	data:{
-		contentid:$('#contentId').val()
+		contentid:$('.contentId').val()
 	},
-	success:function(result){
-		comments= result;
-		renderComment();
-	}
-})
+	success:function(responseData){
+        comments = responseData.data.reverse();
+        renderComment();
+    }
+});
 
 //事件委托，上一页，下一页点击
-$('#pager').delegate('a','click',function(){
+$('.pager').delegate('a','click',function(){
 	if($(this).parent().hasClass('previous')){
 		if(page>1){
 			page--;
@@ -48,41 +47,53 @@ $('#pager').delegate('a','click',function(){
 		}
 	}
 	renderComment();
-})	
+});
 
 //渲染评论页面
 function renderComment() {
+    $('#messageCount').html(comments.length);
+    //分页实现
+    pages = Math.max(Math.ceil(comments.length/prepage), 1);
+    var start = Math.max(0, (page-1)*prepage);
+    var end = Math.min(start+prepage, comments.length);
+    var $lis= $('.pager li');
+    if (page <= 1 ) {
+        page = 1;
+        $lis.eq(1).html( page + ' / ' + pages );
+    } else if (page >= pages) {
+        page = pages;
+        $lis.eq(1).html( page + ' / ' + pages );
+    } else {
+        $lis.eq(1).html( page + ' / ' + pages );
+    }
 
-	//分页实现
-	pages=Math.max(Math.ceil(comments.length/perpage),1);
-	var start=Math.max(0,(page-1)*perpage);
-	var end =Math.min(start+perpage,comments.length);
+    if (page <= 1) {
+        page = 1;
+        $lis.eq(0).html('<span>没有上一页了</span>');
+    } else {
+        $lis.eq(0).html('<a href="javascript:;">上一页</a>');
+    }
+    if (page >= pages) {
+        page = pages;
+        $lis.eq(2).html('<span>没有下一页了</span>');
+    } else {
+        $lis.eq(2).html('<a href="javascript:;">下一页</a>');
+    }
+    //评论数
+    $('#messageCount').html(comments.length);
+    $('#commentC').html(comments.length);
 
-	$lis= $('#pager li');
-	$lis.eq(1).html( page + ' / ' + pages );
-
-
-	//评论数
-	$('#messageCount').html(comments.length);
-	$('#commentC').html(comments.length);
-
-	//判断是否有评论
-	if (comments.length  == 0 ) {
-		$('#noComments').html('<div >还没有留言!</div>');
-		$('#pager').hide();
-		$('#messageList').hide();
-	}else{
-		$('#pager').show();
-		$('#messageList').show();
-		$('#noComments').html('');
-
-		//评论
-		var html = '';
-		for(var i =start;i<end;i++){
-			html +=('<div class="messageBox" ><p class="name clear"><span class="fl">'+comments[i].username+'</span><span class="fl fr">'+formatDate(comments[i].addDate)+'</span></p><p>'+comments[i].content+'</p></div>');
-		}
-		$('#messageList').html(html);
-	};
+    var html = '';
+    for (var i = start; i < end; i++) {
+        html += '<div class="messageBox">\n' +
+            '<p class="name clear">\n' +
+            '<span class="fl">'+ comments[i].username+'</span>\n' +
+            '<span class="fr">'+ formatDate(comments[i].postTime) + '</span>\n' +
+            '</p>\n' +
+            '<p>'+ comments[i].content +'</p>\n' +
+            '</div>';
+    }
+    $('#messageList').html(html);
 }
 
 //格式化显示日期

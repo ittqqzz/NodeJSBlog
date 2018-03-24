@@ -37,6 +37,9 @@
         <div id="intel-collapse" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/">首页</a></li>
+                {% for category in categories %}
+                <li><a href="/?category={{ category.id }}">{{ category.name }}</a></li>
+                {% endfor%}
             </ul>
         </div>
     </div>
@@ -52,11 +55,15 @@
                 <div class="mainRight ">
                     <!-- 用户信息框 -->
                     {% if userInfo._id %}
-                    <div class="rightBox" id="adminBox" >
+                    <div class="rightBox" id="adminBox">
                         <h2>你好</h2>
                         <h3 class="username">{{userInfo.username}}</h3>
+                        {% if userInfo.isAdmin %}
+                        <p class="userInfo">管理员</p>
+                        <p><a href="/admin"><span>进入我的管理中心</span></a></p>
+                        {% else %}
                         <p class="userInfo">欢迎来到我的博客</p>
-                        <p ><a href="/admin"><span>进入我的管理中心</span></a></p>
+                        {% endif %}
                         <a class="loginOut" href="javascript:;">退出</a>
                     </div>
                     {% else %}
@@ -100,7 +107,6 @@
                                 <div class="col-xs-10">
                                     <input class="form-control" placeholder="用户名" type="text" name="username"
                                            id="regUsername">
-                                    <!-- <span class="help-block">用户名长度在3-10个单位</span> -->
                                 </div>
                             </div>
                             <div class="form-group">
@@ -132,13 +138,68 @@
         <!-- 文章 -->
         <div class="col-sm-9 col-sm-pull-3  col-xs-12">
             <div class="mainLeft">
-                <!-- 文章 -->
-                <!-- 分页 -->
-                <div id="mypager">
-                    <ul class="pager">
-                        <li class="disabled previous"><a href="javascript:;"><i class="material-icons">上一页</i></a></li>
-                        <li class="disabled next"><a href="#!"><i class="material-icons">下一页</i></a></li>
-                    </ul>
+                <div class="mainLeft">
+                    <!-- 文章 -->
+                    {% for content in contents %}
+                    <div class="listBox">
+                        <h3>{{content.title}}</h3>
+                        <p class="colDefualt">
+                            作者：<span class="colInfo">{{content.author}}</span>
+                            -时间：<span class="colInfo">{{content.addDat}}</span>
+                            -阅读：<span class="colInfo">{{content.views}}</span>
+                            -评论：<span id="commentC" class="colInfo">{{content.comments.length || '没有评论'}}</span>
+                        </p>
+                        <p class="content">{{content.description}}</p>
+                        <a href="/view?contentid={{content.id}}"><button class="btn btn-primary ">阅读全文</button></a>
+                    </div>
+                    {% endfor %}
+                    <!-- 分页 -->
+                    <div id="mypager">
+                        <ul class="pager">
+                            {% if page <= 1 %}
+                            <li class=" previous disabled"><a href="?/page={{page-1}}"><i class="material-icons">没有上一页了</i></a></li>
+                            {% else %}
+                            <li class=" previous"><a href="?page={{page-1}}"><i class="material-icons">上一页</i></a></li>
+                            {% endif %}
+                            <li><strong>{{page}} / {{pages}}</strong></li>
+                            {% if page >= pages%}
+                            <li class=" next disabled"><a href="javascript:;"><i class="material-icons">没有下一页了</i></a></li>
+                            {% else %}
+                            <li class=" next"><a href="?page={{page+1}}"><i class="material-icons">下一页</i></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <!--<div class="listBox message">-->
+                        <!--<h4 class="textLeft"><strong>评论</strong> <span class="fr">一共有 <em id='messageCount'>0</em>条评论</span>-->
+                        <!--</h4>-->
+                        <!--{% if userInfo._id %}-->
+                        <!--<p class="textLeft clear">-->
+                            <!--<input type="hidden" name="contentid" id="contentId" value="{{content.id}}">-->
+                            <!--<textarea id="commitTextarea" class="commit_textarea" placeholder="请填写你的评论~" rows="20" cols="20"-->
+                                      <!--wrap="hard"></textarea>-->
+                            <!--<button id="messageBtn" class="submit commit_submit">提交</button>-->
+                        <!--</p>-->
+                        <!--{% else %}-->
+                        <!--<p class="bgDanger danger">您还没有登录，请先登录！</p>-->
+                        <!--{% endif %}-->
+                        <!--<div id="noComments"></div>-->
+                        <!--<div id="messageList" id="commitList" style="display: block;">-->
+                            <!--&lt;!&ndash;<div class="messageBox">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p class="name clear">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="fl"></span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<span class="fr"></span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</p>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<p></p>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--</div>-->
+                        <!--<ul id="pager" class="pager">-->
+                            <!--<li class="waves-effect previous"><a href="javascript:;"><i class="material-icons">上一页</i></a>-->
+                            <!--</li>-->
+                            <!--<li class="active middle"><a href="javascript:;"></a></li>-->
+                            <!--<li class="waves-effect next"><a href="javascript:;"><i class="material-icons">下一页</i></a></li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                </div>
                 </div>
             </div>
         </div>
@@ -146,9 +207,9 @@
 </main>
 <!-- 主体内容结束 -->
 <!-- 页脚 -->
-<footer>
-    <div>Copyright ©1997-2500 TQZ Personal, All Rights Reserved</div>
-</footer>
+<!--<footer>-->
+<!--<div>Copyright ©1997-2500 TQZ Personal, All Rights Reserved</div>-->
+<!--</footer>-->
 <script src="/public/js/jquery.min.js"></script>
 <script src="/public/js/index.js"></script>
 <script src="/public/js/bootstrap.min.js"></script>

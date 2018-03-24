@@ -11,10 +11,13 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 //加载cookies模块
 var Cookies = require('cookies');
+
 //解析cookie
 var cookieParser = require('cookie-parser');
 //创建app应用
 var app = express(); // 等价于===>http.createServer()
+//引入用户模型
+var User = require('./models/User');
 /*静态文件托管
 	当用户访问的url以/public开始，
 	那么直接返回对应的__dirname+'/public'下的文件*/
@@ -48,15 +51,20 @@ app.use(function(req,res,next){
     if(req.cookies){
         try{
             req.userInfo = JSON.parse(JSON.stringify(req.cookies.userInfo));
-            console.log('cookies is '+JSON.stringify(req.cookies.userInfo));
+            //获取当前用户的类型，是否是管理员
+            User.findById(req.userInfo._id).then(function (userInfo) {
+                req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+                next();
+            });
+            
         }catch(e){
             console.log('cookie验证出错');
+            next();
         }
     } else {
         console.log('不存在cookie');
+        next();
     }
-
-    next();
 });
 //根据不同功能划分模块（后台、API、前台）
 app.use('/admin',require('./routers/admin'));

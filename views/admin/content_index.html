@@ -23,10 +23,10 @@
 		{% for content in contents %}
 		<tr>
 			<td>{{content.id}}</td>
-			<td>{{content.name}}</td>
+			<td>{{content.category.name}}</td>
 			<td>{{content.title}}</td>
 			<td>{{content.author}}</td>
-			<td>{{content.addDate|date('Y年m月d日 H:i:s',-8*60)}}</td>
+			<td>{{content.addDat |date('Y年m月d日 H:i:s',-8*60)}}</td>
 			<td>{{content.views}}</td>
 			<td>
 				<a href="/admin/content/edit?id={{content.id}}">修改</a> | 

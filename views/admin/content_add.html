@@ -9,7 +9,7 @@
 <form action="" method="post">
 	<div class="form-group">
 		<label for="category">分类:</label>
-		<select name="category" id="category" class="form-control">
+		<select name="category" id="category" class="form-control" style="width: 100px">
 			{% for category in categories %}
 			<option value="{{category.id}}">{{category.name}}</option>
 			{% endfor %}

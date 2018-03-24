@@ -18,11 +18,11 @@
 	<tbody>
 		{% for category in categories %}
 		<tr>
-			<td>{{category.id}}</td>
+			<td>{{category._id.toString()}}</td>
 			<td>{{category.name}}</td>
 			<td>
-				<a href="/admin/category/edit?id={{category.id}}">修改</a> | 
-				<a href="/admin/category/delete?id={{category.id}}">删除</a>
+				<a href="/admin/category/edit?id={{category._id.toString()}}">修改</a> |
+				<a href="/admin/category/delete?id={{category._id.toString()}}">删除</a>
 			</td>
 		</tr>
 		{% endfor %}

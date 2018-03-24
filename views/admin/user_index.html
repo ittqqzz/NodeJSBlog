@@ -19,10 +19,16 @@
 	<tbody>
 		{% for user in users %}
 		<tr>
-			<td>{{user.id.toString()}}</td>
+			<td>{{user._id.toString()}}</td>
 			<td>{{user.username}}</td>
-			<td>{{user.pwd}}</td>
-			<td>{% if user.isAdmin %}是{% endif %}</td>
+			<td>{{user.password}}</td>
+			<td>
+				{% if user.isAdmin %}
+				是
+				{% else %}
+				否
+				{% endif %}
+			</td>
 		</tr>
 		{% endfor %}
 	</tbody>

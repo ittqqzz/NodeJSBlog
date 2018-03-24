@@ -7,6 +7,12 @@ module.exports = new mongoose.Schema({
     //用户名
     username : String,
     //密码
-    password : String
+    password : String,
+
+    //新增是否是管理员字段
+    isAdmin : {
+        type : Boolean,
+        default : false
+    }
 });
 

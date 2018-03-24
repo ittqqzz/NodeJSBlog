@@ -5,10 +5,10 @@ var mongoose = require('mongoose');
 //暴露内容的表结构
 module.exports = new mongoose.Schema({
     //关联字段 -- > 内容分类的id
-    catedoyr : {
+    category : {
         //类型
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'Content'
+        ref : 'Category'
     },
     title : String,
 
@@ -18,8 +18,16 @@ module.exports = new mongoose.Schema({
     },
 
     content: {
-        type : Srting,
+        type : String,
         default : ''
+    },
+
+    author : String,
+    addDat : String,
+    views : String,
+    comments : {
+        type : Array,
+        default : []
     }
 });
 
