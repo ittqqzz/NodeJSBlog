@@ -11,7 +11,6 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 //加载cookies模块
 var Cookies = require('cookies');
-
 //解析cookie
 var cookieParser = require('cookie-parser');
 //创建app应用
