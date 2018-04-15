@@ -1,4 +1,4 @@
-{ "_id" : { "$oid" : "5ab0942691341427e0121b51" }, "username" : "tqz", "password" : "000", "isAdmin" : true, "__v" : 0 }
+{ "_id" : { "$oid" : "5ab0942691341427e0121b51" }, "username" : "admin", "password" : "123456", "isAdmin" : true, "__v" : 0 }
 { "_id" : { "$oid" : "5ab0fd3fc536440ddc05645f" }, "username" : "tt", "password" : "0000", "__v" : 0, "isAdmin" : false }
 { "_id" : { "$oid" : "5ab2036d2015cd0c04db98ac" }, "isAdmin" : false, "username" : "tqz1", "password" : "0000", "__v" : 0 }
 { "_id" : { "$oid" : "5ab203772015cd0c04db98ad" }, "isAdmin" : false, "username" : "tqz2", "password" : "0000", "__v" : 0 }

@@ -10,15 +10,19 @@ var User = require('../models/User');
 var Category = require('../models/Category');
 var Content = require('../models/Content');
 
-//先验证是否为管理员操作
-router.use(function (req, res, next) {
-    if (!req.userInfo.isAdmin) {
-        //不是管理员
-        res.send('你不是管理员，退下！');
-        return;
-    }
-    next();
-});
+/**
+ * 先验证是否为管理员操作
+ * 暂时关闭这一功能，因为测试需要。项目完全发布时，可以取消注释
+ */
+
+// router.use(function (req, res, next) {
+//     if (!req.userInfo.isAdmin) {
+//         //不是管理员
+//         res.send('你不是管理员，退下！');
+//         return;
+//     }
+//     next();
+// });
 
 router.get('/', function (req, res, next) {
     res.render('admin/index', {

@@ -129,8 +129,9 @@ router.get('/comment',function(req,res){
     });
 });
 
-/*评论提交
-*/
+/**
+ * 评论提交   注意：后端评论模块暂时关闭，前端正常
+ */
 router.post('/comment/post',function(req,res){
 
    var contentId = req.body.contentid || '';
