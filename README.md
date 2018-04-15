@@ -20,14 +20,18 @@
 - 按下回车启动数据库服务
 - 使用cmd进入项目所在目录，例如：C:\Users\tqz\WebstormProjects\Node\Blog，
   使用命令：node app.js启动服务器，然后在浏览器访问：http://localhost:3000/
-- 用户名：admin  密码：123456
+- 登陆用户名：admin  密码：123456
   
 ## 项目截图
 - 前端首页
+
 ![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/home.bmp)
 - 后端首页
-![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/backend.bmp)、
+
+![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/backend.bmp)
 - 项目后端功能演示
+
 ![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/backdemo.gif)
 - 项目启动演示
+
 ![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/qidong.gif)
