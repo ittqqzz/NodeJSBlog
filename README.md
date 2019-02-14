@@ -25,13 +25,13 @@
 ## 项目截图
 - 前端首页
 
-![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/home.bmp)
+![kBlO2T.png](https://s2.ax1x.com/2019/02/14/kBlO2T.png)
 - 后端首页
 
-![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/backend.bmp)
+![kBlLGV.png](https://s2.ax1x.com/2019/02/14/kBlLGV.png)
 - 项目后端功能演示
 
-![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/backdemo.gif)
+![kBlXxU.gif](https://s2.ax1x.com/2019/02/14/kBlXxU.gif)
 - 项目启动演示
 
-![Image text](https://gitee.com/ittqqzz/myPictureWarehouse/raw/master/NodeJSBlog/qidong.gif)
+![kBlvMF.gif](https://s2.ax1x.com/2019/02/14/kBlvMF.gif)
