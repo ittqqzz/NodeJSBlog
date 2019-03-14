@@ -1,5 +1,4 @@
-# NodeJS开发简易博客系统（纯前端）
-##### 十分简易的node.js web入门demo，代码清晰易懂，注释还多。仅供交流学习。
+# NodeJS开发简易博客系统
 ## 技术要点
 - Node.js
 - 数据库：MongoDB
