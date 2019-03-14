@@ -33,4 +33,5 @@
 ![kBlXxU.gif](https://s2.ax1x.com/2019/02/14/kBlXxU.gif)
 - 项目启动演示
 
-<div align="center"><img src="https://s2.ax1x.com/2019/02/14/kBlvMF.gif"></img></div>
+[github 对图片大小有限制，无法显示大图片，点击这里查看启动演示](https://s2.ax1x.com/2019/02/14/kBlvMF.gif)
+
